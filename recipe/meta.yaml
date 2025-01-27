@@ -1,3 +1,4 @@
+{% set python_min = '3.9.6' %}
 {% set name = "nomad-camels-driver-cam-control-pylablib" %}
 {% set version = "0.1.4" %}
 
@@ -6,24 +7,26 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/nomad_camels_driver_cam_control_pylablib-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/nomad_camels_driver_cam_control_pylablib-{{ version }}.tar.gz
   sha256: cbd0339dcad48ca27a557bdcda70c7aa0ca94542778aadc9bc3077c304491842
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.9.6
+    - python {{ python_min }}
     - setuptools >=61.0
     - pip
   run:
-    - python >=3.9.6
+    - python >={{ python_min }}
     - nomad-camels >=0.2
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - nomad_camels_driver_cam_control_pylablib
 
