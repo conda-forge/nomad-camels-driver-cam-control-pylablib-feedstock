@@ -1,6 +1,6 @@
-{% set python_min = '3.9.6' %}
 {% set name = "nomad-camels-driver-cam-control-pylablib" %}
 {% set version = "0.1.4" %}
+{% set python_min = "3.10" %}
 
 package:
   name: {{ name|lower }}
