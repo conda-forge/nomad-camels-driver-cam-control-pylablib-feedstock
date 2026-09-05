@@ -1,0 +1,46 @@
+schema_version: 1
+
+context:
+  name: nomad-camels-driver-cam-control-pylablib
+  version: "0.1.4"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/nomad_camels_driver_cam_control_pylablib-${{ version }}.tar.gz
+  sha256: cbd0339dcad48ca27a557bdcda70c7aa0ca94542778aadc9bc3077c304491842
+
+build:
+  number: 2
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - setuptools >=61.0
+    - pip
+  run:
+    - python >=${{ python_min }}
+    - nomad-camels >=0.2
+
+tests:
+  - python:
+      imports:
+        - nomad_camels_driver_cam_control_pylablib
+      pip_check: false
+      python_version: 
+        - ${{ python_min }}
+        - "*"
+
+about:
+  summary: This packes allows you to connect to Cam-Control by pylablibs.
+  license: LGPL-2.1-or-later
+  license_file: LICENSE.txt
+  homepage: https://github.com/FAU-LAP/CAMELS_drivers
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
